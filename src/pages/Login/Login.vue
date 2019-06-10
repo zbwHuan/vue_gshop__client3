@@ -141,7 +141,6 @@
     },
     updated () {
       if(this.$store.state.user._id){
-        console.log(1111);
         this.$router.replace('/profile')
       }
     }
