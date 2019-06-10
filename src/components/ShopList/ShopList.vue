@@ -20,7 +20,7 @@
               </section>
               <section class="shop_rating_order">
                 <section class="shop_rating_order_left">
-                  <Star :score="shop.rating" :size="24" />
+                  <Star :score="shop.rating" :size="24"/>
                   <div class="rating_section">
                     {{shop.rating}}
                   </div>
@@ -65,7 +65,9 @@
   import {mapState} from 'vuex'
   export default {
     computed: {
-      ...mapState(['shops'])
+      ...mapState({
+        shops: state => state.msite.shops
+      })
     }
   }
 </script>
@@ -91,7 +93,7 @@
         .shop_li
           bottom-border-1px(#f1f1f1)
           width 100%
-          >a
+          > a
             clearFix()
             display block
             box-sizing border-box
