@@ -45,8 +45,7 @@
     "rules": {
       "no-unused-vars": "off",
       "no-debugger": "off",
-      "no-console": "off",
-      "vue/no-side-effects-in-computed-properties": "off"
+      "no-console": "off"
     },
     "parserOptions": {
       "parser": "babel-eslint"

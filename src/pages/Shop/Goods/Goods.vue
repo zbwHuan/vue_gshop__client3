@@ -22,7 +22,12 @@
           <li class="food-list-hook" v-for="good in goods" :key="good.name">
             <h1 class="title">{{good.name}}</h1>
             <ul>
-              <li class="food-item bottom-border-1px" v-for="food in good.foods" :key="food.name">
+              <li
+                class="food-item bottom-border-1px"
+                v-for="food in good.foods"
+                :key="food.name"
+                @click="showFood(food)"
+              >
                 <div class="icon">
                   <img width="57" height="57" :src="food.icon">
                 </div>
@@ -36,25 +41,32 @@
                   <div class="price">
                     <span class="now">￥{{food.price}}</span>
                   </div>
-                  <div class="cartcontrol-wrapper">CartControl组件</div>
+                  <div class="cartcontrol-wrapper">
+                    <CartControl :food="food"/>
+                  </div>
                 </div>
               </li>
             </ul>
           </li>
         </ul>
       </div>
+      <ShopCart/>
     </div>
+    <Food :food="food" ref="food"/>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
 import { mapState } from 'vuex'
 import BScroll from 'better-scroll'
+import Food from './Food'
+import ShopCart from './ShopCart'
 export default {
   data() {
     return {
       scrollY: 0,
-      tops: []
+      tops: [],
+      food: {}
     }
   },
   computed: {
@@ -68,6 +80,7 @@ export default {
       })
 
       if (this.leftScroll && this.index !== index) {
+        // eslint-disable-next-line
         this.index = index
         const li = this.$refs.leftUl.children[index]
         this.leftScroll.scrollToElement(li, 300)
@@ -114,7 +127,15 @@ export default {
       })
 
       this.tops = tops
+    },
+    showFood(food) {
+      this.food = food
+      this.$refs.food.toggleShow()
     }
+  },
+  components: {
+    Food,
+    ShopCart
   }
 }
 </script>
