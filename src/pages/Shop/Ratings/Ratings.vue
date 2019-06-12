@@ -27,29 +27,31 @@
 
       <Split/>
 
-      <div>RatingSelect组件</div>
+      <RatingsFilter
+        :selectType="selectType"
+        :onlyContent="onlyContent"
+        @toggleOnlyContent="toggleOnlyContent"
+        @setSelectType="setSelectType"
+      />
 
       <div class="rating-wrapper">
         <ul>
-          <li class="rating-item">
+          <li class="rating-item" v-for="(rating, index) in ratingShow" :key="index">
             <div class="avatar">
-              <img
-                width="28"
-                height="28"
-                src="http://static.galileo.xiaojukeji.com/static/tms/default_header.png"
-              >
+              <img width="28" height="28" :src="rating.avatar">
             </div>
             <div class="content">
-              <h1 class="name">xxx</h1>
+              <h1 class="name">{{rating.username}}</h1>
               <div class="star-wrapper">
-                <div>Star组件</div>
-                <span class="delivery">30</span>
+                <Star :score="rating.score" :size="24"/>
+                <span class="delivery">{{rating.deliveryTime}}</span>
               </div>
-              <p class="text">还可以</p>
+              <p class="text">{{rating.text}}</p>
               <div class="recommend">
-                <span class="iconfont icon-thumb_up"></span>
+                <span class="iconfont" :class="ratingClasses[rating.rateType]"></span>
+                <span class="item" v-for="(item, index) in rating.recommend" :key="index">{{item}}</span>
               </div>
-              <div class="time">2016-12-11 12:02:13</div>
+              <div class="time">{{rating.rateTime | dateFormat}}</div>
             </div>
           </li>
         </ul>
@@ -59,13 +61,70 @@
 </template>
 
 <script type="text/ecmascript-6">
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
+import BScroll from 'better-scroll'
+import RatingsFilter from './RatingsFilter'
 export default {
+  data() {
+    return {
+      ratingClasses: ['icon-thumb_up', 'icon-thumb_down'],
+      selectType: 2,
+      onlyContent: false
+    }
+  },
   computed: {
     ...mapState({
       ratings: state => state.shop.ratings,
       info: state => state.shop.info
-    })
+    }),
+
+    ratingShow: {
+      get() {
+        const ratings = this.ratings
+        if (!ratings) {
+          return []
+        }
+        const { selectType, onlyContent } = this
+        return ratings.filter(rating => {
+          if (selectType === 2) {
+            return !onlyContent || rating.text.length > 0
+          } else {
+            return (
+              selectType === rating.rateType &&
+              (!onlyContent || rating.text.length > 0)
+            )
+          }
+        })
+      },
+      set() {}
+    }
+  },
+
+  methods: {
+    _initScroll() {
+      this.scroll = new BScroll('.ratings', {
+        click: true
+      })
+    },
+    setSelectType(selectType) {
+      this.selectType = selectType
+      this.$nextTick(() => {
+        this.scroll.refresh()
+      })
+    },
+
+    toggleOnlyContent() {
+      this.onlyContent = !this.onlyContent
+      this.$nextTick(() => {
+        this.scroll.refresh()
+      })
+    }
+  },
+  components: {
+    RatingsFilter
+  },
+  mounted() {
+    this._initScroll()
   }
 }
 </script>
@@ -267,4 +326,3 @@ export default {
   }
 }
 </style>
-

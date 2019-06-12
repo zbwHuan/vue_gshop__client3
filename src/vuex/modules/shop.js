@@ -6,7 +6,8 @@ import {
   RECEIVE_INFO,
   RECEIVE_RATINGS,
   ADD_FOOD_COUNT,
-  REDUCE_FOOD_COUNT
+  REDUCE_FOOD_COUNT,
+  UPDATE_RATINGS
 } from '../mutation-types'
 const state = {
   info: {},
@@ -69,6 +70,9 @@ const mutations = {
         state.cartFoods.splice(state.cartFoods.indexOf(food), 1)
       }
     }
+  },
+  [UPDATE_RATINGS] (state, ratings) {
+    state.ratings = ratings
   }
 }
 const getters = {
@@ -77,6 +81,22 @@ const getters = {
   },
   totalPrice (state) {
     return state.cartFoods.reduce((pre, food) => pre + food.count * food.price, 0)
+  },
+  goodRatings (state) {
+    return state.ratings.reduce((pre, rating) => {
+      if (rating.rateType === 0) {
+        pre.push(rating)
+      }
+      return pre
+    }, [])
+  },
+  badRatings (state) {
+    return state.ratings.reduce((pre, rating) => {
+      if (rating.rateType === 1) {
+        pre.push(rating)
+      }
+      return pre
+    }, [])
   }
 }
 

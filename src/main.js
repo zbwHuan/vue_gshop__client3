@@ -9,6 +9,7 @@ import Star from './components/Star/Star.vue'
 import CartControl from './components/CartControl/CartControl.vue'
 import Split from './components/Split/Split.vue'
 import store from './vuex/store'
+import './filters'
 import './validate'
 import './mock/mock-server'
 
