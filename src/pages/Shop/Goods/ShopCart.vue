@@ -113,7 +113,10 @@ export default {
       if (this.totalCount > 0) {
         this.isShow = !this.isShow
       }
-    }
+    } /* ,
+    clearShopCart() {
+      this.$store.dispatch('clearFoodCount')
+    } */
   }
 }
 </script>

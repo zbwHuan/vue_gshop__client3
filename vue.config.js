@@ -1,6 +1,6 @@
 const path = require('path')
 
-function resolve(dir) {
+function resolve (dir) {
   // return path.join(__dirname, '..', dir)
   return path.join(__dirname, dir)
 }
@@ -12,6 +12,7 @@ module.exports = {
       alias: {
         'vue$': 'vue/dist/vue.esm.js',
         'components': resolve('src/components'),
+        'common': resolve('src/common'),
       }
     }
   },

@@ -7,7 +7,8 @@ import {
   RECEIVE_RATINGS,
   ADD_FOOD_COUNT,
   REDUCE_FOOD_COUNT,
-  UPDATE_RATINGS
+  UPDATE_RATINGS/* ,
+  CLEAR_FOOD_COUNT */
 } from '../mutation-types'
 const state = {
   info: {},
@@ -43,7 +44,11 @@ const actions = {
     } else {
       commit(REDUCE_FOOD_COUNT, { food })
     }
-  }
+  }/* ,
+  clearFoodCount ({ commit }) {
+    console.log(1111)
+    commit(CLEAR_FOOD_COUNT)
+  } */
 }
 const mutations = {
   [RECEIVE_GOODS] (state, { goods }) {
@@ -73,7 +78,11 @@ const mutations = {
   },
   [UPDATE_RATINGS] (state, ratings) {
     state.ratings = ratings
-  }
+  }/* ,
+  [CLEAR_FOOD_COUNT] (state) {
+    console.log(22222)
+    state.cartFoods.splice(0)
+  } */
 }
 const getters = {
   totalCount (state) {

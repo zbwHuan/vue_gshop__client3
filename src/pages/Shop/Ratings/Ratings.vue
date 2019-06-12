@@ -263,6 +263,7 @@ export default {
         .star-wrapper {
           margin-bottom: 6px;
           font-size: 0;
+          clearFix();
 
           .star {
             display: inline-block;
