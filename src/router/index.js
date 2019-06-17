@@ -5,7 +5,20 @@ import routes from './routes'
 
 Vue.use(VueRouter)
 
-export default new VueRouter({
+const router = new VueRouter({
   mode: 'history',
   routes
 })
+
+const path = ['/a', '/b']
+
+router.beforeEach((to, form, next) => {
+  if (path.indexOf(to.path) !== -1) {
+    if (!Vue.store.state.user.user._id) {
+      next('/login')
+    }
+  }
+  next()
+})
+
+export default router

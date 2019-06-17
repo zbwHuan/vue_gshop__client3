@@ -1,12 +1,23 @@
-import MSite from '../pages/MSite/MSite.vue'
+/* import MSite from '../pages/MSite/MSite.vue'
 import Search from '../pages/Search/Search.vue'
 import Order from '../pages/Order/Order.vue'
-import Profile from '../pages/Profile/Profile.vue'
+import Profile from '../pages/Profile/Profile.vue' */
+
+const MSite = () => import('../pages/MSite/MSite.vue')
+const Search = () => import('../pages/Search/Search.vue')
+const Order = () => import('../pages/Order/Order.vue')
+const Profile = () => import('../pages/Profile/Profile.vue')
+
 import Login from '../pages/Login/Login.vue'
 import Shop from '../pages/Shop/shop.vue'
 import Goods from '../pages/Shop/Goods/Goods.vue'
 import Ratings from '../pages/Shop/Ratings/Ratings.vue'
 import Info from '../pages/Shop/Info/Info.vue'
+
+import A from '../pages/test/A.vue'
+import B from '../pages/test/B.vue'
+import B1 from '../pages/test/B1.vue'
+import B2 from '../pages/test/B2.vue'
 
 
 export default [
@@ -64,6 +75,24 @@ export default [
       }
     ]
   },
+
+  {
+    path: '/a',
+    component: A
+  }, {
+    path: '/b',
+    component: B,
+    children: [{
+      path: '/b/b1',
+      component: B1
+    },
+    {
+      path: '/b/b2',
+      component: B2
+    },
+    ]
+  },
+
   {
     path: '/',
     redirect: '/msite'

@@ -11,6 +11,7 @@ import Star from './components/Star/Star.vue'
 import CartControl from './components/CartControl/CartControl.vue'
 import Split from './components/Split/Split.vue'
 import store from './vuex/store'
+import loading from './common/images/loading.gif'
 
 import './filters'
 import './validate'
@@ -19,6 +20,8 @@ import './mock/mock-server'
 
 Vue.config.productionTip = false
 
+Vue.store = store
+
 Vue.component(Button.name, Button)
 Vue.component('Header', Header)
 Vue.component('Star', Star)
@@ -26,8 +29,7 @@ Vue.component('CartControl', CartControl)
 Vue.component('Split', Split)
 
 Vue.use(VueLazyload, {
-  loading: './common/images/loading.gif',
-  attempt: 1
+  loading
 })
 
 /* eslint-disable no-new */
