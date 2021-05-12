@@ -14,7 +14,7 @@
     "global": "^4.3.2",
     "mint-ui": "^2.2.13",
     "mockjs": "^1.0.1-beta3",
-    "swiper": "^4.5.0",
+    "swiper": "^6.5.1",
     "vee-validate": "^2.2.9",
     "vue": "^2.6.10",
     "vue-router": "^3.0.6",
